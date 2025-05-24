@@ -7,3 +7,25 @@ on:
   pull_request:
     branches:
       - master
+
+jobs: 
+  test:
+    runs-on: ubuntu-latest
+
+    setps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+        
+      - name: Instalar dependencias
+        run: npm install
+        
+      - name: Garantir permissões de execução para Mocha
+        run: chmod +x ./node_modules/.bin/mocha
+        
+      - name: Verirficar o caminho do mocha
+        run: npx mocha
